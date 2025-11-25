@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>darkPanel — Download</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+
+        <!-- Disable Inspect / Copy -->
+        <script>
+            document.addEventListener('contextmenu', (e) => e.preventDefault());
+            document.addEventListener('selectstart', (e) => e.preventDefault());
+            document.addEventListener('dragstart', (e) => e.preventDefault());
+            document.addEventListener('keydown', function (e) {
+                if (
+                    e.key === 'F12' ||
+                    (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                    (e.ctrlKey && e.key === 'U')
+                ) {
+                    e.preventDefault();
+                }
+            });
+        </script>
+
+        <!-- AUTO LANGUAGE SYSTEM -->
+        <script>
+            async function applyLanguage() {
+                try {
+                    // 1) Language detect (via backend geo API)
+                    const geo = await fetch('/api/geo').then((r) => r.json());
+                    const lang = (geo.lang || 'en').slice(0, 2);
+
+                    // 2) Load translation JSON
+                    const dict = await fetch(`/lang/${lang}.json`)
+                        .then((res) => res.json())
+                        .catch(() => null);
+
+                    if (!dict) return;
+
+                    // 3) Insert translated text into UI
+                    document.querySelectorAll('[data-i18n]').forEach((el) => {
+                        const key = el.getAttribute('data-i18n');
+                        if (dict[key]) el.innerHTML = dict[key];
+                    });
+                } catch (e) {
+                    console.warn('Language auto-apply failed:', e);
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', applyLanguage);
+        </script>
+
+        <script>
+            function downloadFile() {
+                window.location.href =
+                    'https://raw.githubusercontent.com/Cyber05CC/darkenbek/main/darkPanel.zip';
+            }
+        </script>
+    </head>
+
+    <body>
+        <!-- BACKGROUND VIDEO -->
+        <video class="bg-video" autoplay muted loop playsinline>
+            <source src="./bg.mp4" type="video/mp4" />
+        </video>
+
+        <div class="overlay"></div>
+
+        <div class="wrap fade-up delay-1">
+            <header class="top fade-up delay-2">
+                <div class="logo-area fade-up delay-3">
+                    <div class="btn-wrapper">
+                        <!-- ANIMATED LOGO BUTTON -->
+                        <button class="btn">
+                            <svg
+                                class="btn-svg"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
+                                ></path>
+                            </svg>
+
+                            <div class="txt-wrapper">
+                                <div class="txt-1">
+                                    <span class="btn-letter">d</span>
+                                    <span class="btn-letter">a</span>
+                                    <span class="btn-letter">r</span>
+                                    <span class="btn-letter">k</span>
+                                    <span class="btn-letter">P</span>
+                                    <span class="btn-letter">a</span>
+                                    <span class="btn-letter">n</span>
+                                    <span class="btn-letter">e</span>
+                                    <span class="btn-letter">l</span>
+                                </div>
+
+                                <div class="txt-2">
+                                    <span class="btn-letter">d</span>
+                                    <span class="btn-letter">a</span>
+                                    <span class="btn-letter">r</span>
+                                    <span class="btn-letter">k</span>
+                                    <span class="btn-letter">e</span>
+                                    <span class="btn-letter">n</span>
+                                    <span class="btn-letter">A</span>
+                                    <span class="btn-letter">e</span>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- SUBTITLE -->
+            <p class="sub fade-up delay-4" data-i18n="subtitle">
+                Clean motion tools for After Effects
+            </p>
+
+            <!-- CARD -->
+            <div class="card fade-up delay-5">
+                <h2 class="fade-up delay-6" data-i18n="title">darkPanel Extension</h2>
+
+                <p class="desc fade-up delay-7" data-i18n="description">
+                    Bilaman, har bir motion editda AE’da text animatsiya qilish azob... Men bunga
+                    chek qo‘yib, yangi darkPanel pluginimni yasadim.<br /><br />Narxi: “atiga 1 ta
+                    CapCut montaj narxiga teng!”<br /><br />Batafsil: Trenddagi — Apple Style Text
+                    Animation va yana boshqa premium animatsiyalar.<br /><br />Text animatsiyalar
+                    soni: 30 ta<br /><br /><b>Plugin narxi: <u>99.000 so'm</u> ✅</b><br /><br />Bu
+                    narxda siz cheksiz, to‘liq versiyani olasiz.
+                </p>
+
+                <div class="dl-btn" onclick="downloadFile()">Download .zip</div>
+
+                <a
+                    href="https://t.me/darken_edit"
+                    class="dl-btn fade-up delay-9"
+                    target="_blank"
+                    data-i18n="buy_key"
+                >
+                    Limitsiz key sotib olish
+                </a>
+
+                <span class="version fade-up delay-10">
+                    <span data-i18n="version">Version</span> 2.8 • AE 2024–2025
+                </span>
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="fade-up delay-11" data-i18n="footer">
+                © 2025 darkPanel — by darken_ae
+            </footer>
+        </div>
+    </body>
+</html>
